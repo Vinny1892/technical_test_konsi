@@ -13,7 +13,4 @@ class ScrappingBenefitService(ServiceContract):
         self.memory_repository = memory_repository
 
     def handle(self, data_request: Dict) -> Dict:
-        data = self.memory_repository.get(data_request['cpf'])
-        if data is not None:
-            return {"benefit": data}
         self.producer.publish(json.dumps(data_request))

@@ -2,7 +2,7 @@ import logging
 
 from crawler_benefit.contract.consumer_driver_contract import ConsumerDriverContract
 from crawler_benefit.queue_driver.rabbitmq.consumer.handle_consumer import (
-    HandleConsumer,
+    HandleConsumer
 )
 
 
@@ -11,5 +11,6 @@ def start(consumer_driver: ConsumerDriverContract) -> None:
 
 
 if __name__ == "__main__":
+    print("INICIANDO ETL")
     consumer = HandleConsumer()
     start(consumer)

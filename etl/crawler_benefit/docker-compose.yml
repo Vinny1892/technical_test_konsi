@@ -1,0 +1,14 @@
+services:
+  crawler_benefit:
+    container_name: crawler_benefit
+    command: python crawler_benefit/main.py
+    build:
+      context: .
+      dockerfile: docker/developer/dockerfile
+    volumes:
+      - .:/etl/
+    networks:
+      - konsi
+networks:
+  konsi:
+    external: true

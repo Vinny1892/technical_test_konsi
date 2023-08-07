@@ -50,7 +50,7 @@ up-daemon: ## Shell developer
 
 .PHONY: shell
 shell: ## Shell developer
-	@docker exec -ti api-dev bash
+	@docker exec -ti crawler_benefit bash
 
 .PHONY: lint
 lint: ## lint

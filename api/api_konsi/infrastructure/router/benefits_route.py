@@ -30,6 +30,7 @@ async def scraping_benefit(benefit_model: BenefitModelRequest):
         "password": benefit_model.password,
         "cpf": cpf_without_special_character
     }
+
     return service.handle(data)
 
 
