@@ -1,0 +1,15 @@
+services:
+  api:
+    container_name: api-dev
+    build:
+      context: .
+      dockerfile: docker/developer/dockerfile
+    volumes:
+      - .:/api/
+    ports:
+      - '32568:8082'
+    networks:
+      - konsi
+networks:
+  konsi:
+    external: true

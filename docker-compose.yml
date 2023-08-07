@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - konsi
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - konsi
+  
+  selenium-chrome:
+    image: selenium/standalone-chrome:4.11.0
+    ports:
+      - "4444:4444"
+    shm_size: "8g"
+    networks:
+      - konsi
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - konsi
+  
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.15.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      # Add any other Kibana environment variables here if needed
+    ports:
+      - "5601:5601"
+    networks:
+      - konsi
+networks:
+  konsi:
+    external: true

@@ -1,0 +1,23 @@
+services:
+  api:
+    container_name: api-prod
+    build:
+      context: ../..
+      dockerfile: dockerfile
+    ports:
+      - '65090:80'
+
+  nginx:
+    container_name: nginx-prod
+    build:
+      context: ../..
+      dockerfile: nginx/dockerfile
+    volumes:
+      - ./nginx/default.conf:/tmp/default.conf
+    environment:
+      - FAST_API_SERVER_ADDR=api:80
+    command: /app/start.sh
+    ports:
+      - 65080:80
+    depends_on:
+      - api

@@ -1,0 +1,6 @@
+[run]
+omit =
+    api/tests/*
+    api/infrastructure/server.py
+    api/main.py
+
