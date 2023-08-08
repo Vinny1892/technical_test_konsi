@@ -17,3 +17,4 @@ Essa flexibilidade torna a estrutura mais robusta e facilita a manutenção e ev
 
 ## Roadmap
   - [ ]  Diagrama C4 do fluxo do ETL
+  - [ ]  Mandar logs para elastisearch
