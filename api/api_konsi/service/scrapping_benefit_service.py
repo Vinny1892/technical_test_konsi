@@ -1,4 +1,5 @@
 import json
+import logging
 from typing import Dict
 
 from api_konsi.contracts.get_benefit_contract import GetBenefitContract

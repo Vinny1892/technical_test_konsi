@@ -1,3 +1,4 @@
+import logging
 import time
 
 from decouple import config
@@ -7,6 +8,7 @@ from selenium.webdriver.common.by import By
 from crawler_benefit.contract.steps.etl_contract import EtlContract
 from crawler_benefit.exceptions.steps.etl_exception import EtlException
 
+logger = logging.getLogger(__file__)
 
 class Extract:
     def __init__(self, data):
@@ -54,7 +56,7 @@ class Extract:
         time.sleep(5)
 
     def _scrap(self):
-        print("iniciando scrapy")
+        logger.debug("iniciando scrapy")
         init = time.time()
         options = webdriver.ChromeOptions()
         options.add_argument("--disable-gpu")
@@ -62,7 +64,7 @@ class Extract:
         selenium_port = config("SELENIUM_PORT", cast=int)
         driver = webdriver.Remote(command_executor=f"{selenium_host}:{selenium_port}", options=options)
         try:
-            print("iniciando scrapy")
+            logger.debug("iniciando scrapy")
             url = "http://extratoclube.com.br/"
             driver.get(url)
             frame_tag = driver.find_element(By.TAG_NAME, "frame")
@@ -72,7 +74,7 @@ class Extract:
             self._login(driver=driver)
             # DASHBOARD
             # MODAL
-            print("login feito")
+            logger.debug("login feito")
 
             self._close_modal_and_sidebar(driver=driver)
             # ITEMS
@@ -81,7 +83,6 @@ class Extract:
             time.sleep(5)
             for button in list_of_buttons:
                 if button.text == "ENCONTRAR BENEFÍCIOS DE UM CPF":
-                    print(button.text)
                     button.click()
 
             self._scroll_page(driver=driver)

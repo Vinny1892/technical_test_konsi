@@ -1,4 +1,5 @@
 import json
+import logging
 
 import pika
 from decouple import config
@@ -7,16 +8,15 @@ from crawler_benefit.contract.consumer_driver_contract import ConsumerDriverCont
 from crawler_benefit.queue_driver.rabbitmq.consumer.get_benefit_by_cpf_consumer import (
     GetBenefitByCpfConsumer,
 )
-
+logger = logging.getLogger(__file__)
 
 class HandleConsumer(ConsumerDriverContract):
     def callback(self, ch, method, properties, body):
-        print("CONSUMIDO DO RABBITMQ")
+        logger.info("consumindo mensagem no rabbitmq")
         consumer = GetBenefitByCpfConsumer()
         message = body.decode()
         data = json.loads(message)
         consumer.consume(data)
-        print(data)
         ch.basic_ack(delivery_tag=method.delivery_tag)
 
     def init(self):
@@ -37,13 +37,13 @@ class HandleConsumer(ConsumerDriverContract):
         exchange_type = config("RABBITMQ_EXCHANGE_TYPE", cast=str)
 
         channel.exchange_declare(exchange=exchange_name, exchange_type=exchange_type)
-        channel.basic_qos(prefetch_count=1)
-        result = channel.queue_declare("", exclusive=True)
-        queue_name = result.method.queue
+        # channel.basic_qos(prefetch_count=1)
+        # result = channel.queue_declare("", exclusive=True)
+        # queue_name = result.method.queue
         # channel.queue_declare(queue=queue_name, durable=True)
 
         channel.queue_bind(exchange=exchange_name, queue=queue_name, routing_key=routing_key)
         channel.basic_consume(queue=queue_name, on_message_callback=self.callback, auto_ack=False)
 
-        print("Aguardando mensagens. Para sair pressione CTRL+C")
+        logger.info("Aguardando mensagens. Para sair pressione CTRL+C")
         channel.start_consuming()

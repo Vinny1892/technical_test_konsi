@@ -1,3 +1,4 @@
+import logging
 from typing import Optional, List
 
 import pika
@@ -6,6 +7,7 @@ from api_konsi.business.observer import Observer
 from api_konsi.infrastructure.config.environment_variable.config import config
 from api_konsi.infrastructure.repository.queue.rabbitmq.producer.base_producer import BaseProducer
 
+logger = logging.getLogger(__file__)
 
 class GetBenefitByCPFProducer(BaseProducer):
 
@@ -34,4 +36,5 @@ class GetBenefitByCPFProducer(BaseProducer):
         channel.queue_declare(queue=queue_name, durable=True)
         channel.queue_bind(exchange=exchange_name, queue=queue_name, routing_key=routing_key)
         channel.basic_publish(exchange=exchange_name, routing_key=routing_key, body=message)
+        logger.info("publicando mensagem na fila")
         self.notify()

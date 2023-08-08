@@ -1,9 +1,11 @@
-import logging
-
 from uvicorn import run
+
+from api_konsi.infrastructure.config.logger.logger_config import LoggerConfig
 from config.environment_variable.config import config
 
+
 def start_server():
+    LoggerConfig().init()
     host = config("HOST", "localhost")
     port = config("PORT", 8080, cast=int)
     run(
