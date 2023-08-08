@@ -15,6 +15,6 @@ Internamente, o consumidor utiliza uma estrutura baseada no padrão de projeto T
 Essa flexibilidade torna a estrutura mais robusta e facilita a manutenção e evolução do sistema ao longo do tempo. À medida que novos requisitos ou tecnologias surgem, a estrutura desacoplada e baseada no padrão Template Method possibilita a adição e substituição de etapas do processo com relativa facilidade, sem impactar negativamente o funcionamento geral do consumidor e da pipeline. Isso resulta em um código mais limpo, modular e com maior capacidade de adaptação a mudanças futuras.
 
 
-## Roadmap
+## TODO
   - [ ]  Diagrama C4 do fluxo do ETL
   - [ ]  Mandar logs para elastisearch

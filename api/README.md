@@ -14,6 +14,6 @@ Além disso, a estrutura da API facilita a reutilização de código, pois os se
 
 Em suma, a arquitetura desacoplada da API, com serviços e interfaces, contribui para um código mais limpo, organizado e adaptável, permitindo uma fácil manutenção e evolução da aplicação ao longo do tempo.
 
-## Roadmap
+## TODO
   - [ ]  Diagrama C4 do fluxo da API
   - [ ]  Mandar logs para elastisearch
