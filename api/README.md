@@ -16,3 +16,4 @@ Em suma, a arquitetura desacoplada da API, com serviços e interfaces, contribui
 
 ## Roadmap
   - [ ]  Diagrama C4 do fluxo da API
+  - [ ]  Mandar logs para elastisearch

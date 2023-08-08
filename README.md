@@ -25,8 +25,13 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 ## 🚀 Instalação
  o arquivo de .env é utilizado para popular as variaveis necessarias para aplicação se conectar com serviços externos necessarios e funcionar corretamente. Para utilização com o docker-compose-common não é necessario nenhuma mudança nos valores presente .env.example.
    Caso seja a primeira vez subindo o serviço entrar na pasta da api ou do crawler_benefit e rodar os seguintes comandos.
+   
+     - cp .env.example .env
+
      - make init
+
      - make create-elasticsearch-index
+
  No caso do ocorrer erro no ultimo comando aguarde alguns segundos e então execute novamente, esse erro aconteçe porque pode ser que o elasticsearch ainda não esteja iniciado totalmente.  
 <br>
 
@@ -95,7 +100,7 @@ $ docker-compose up -d
 
 ## Execução dos testes e fixtures
 
-Para execução dos testes e de outros comandos de forma simplificada no perojeto foi criado um `Makefile`, para rodar os testes só precisa rodar
+Para execução dos testes e de outros comandos de forma simplificada no perojeto foi criado um `Makefile`, para rodar os testes só rodar
 ```
 make up-silent
 make test
